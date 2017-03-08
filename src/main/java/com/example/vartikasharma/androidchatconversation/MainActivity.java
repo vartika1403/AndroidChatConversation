@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     /* package-local */ Toolbar toolbar;
 
     @BindView(R.id.tabLayout)
-    /* package-local */ TabLayout gamesChatTabLayout;
+    /* package-local */ TabLayout chatTabLayout;
 
     @BindView(R.id.pager)
     /* package-local */ ViewPager viewPager;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         setUpViewPager(viewPager);
 
-        gamesChatTabLayout.setupWithViewPager(viewPager);
+        chatTabLayout.setupWithViewPager(viewPager);
 
         setUpTabItems();
     }
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView) tabFirstItem.findViewById(R.id.tab_item_image);
         imageView.setImageResource(R.drawable.start_chat);
-        gamesChatTabLayout.getTabAt(0).setCustomView(tabFirstItem);
+        chatTabLayout.getTabAt(0).setCustomView(tabFirstItem);
 
         //set view for second tab
         LinearLayout tabSecondItem = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.tab_layout_item, null);
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         secondTextView.setTextColor(Color.parseColor("#2290D3"));
         ImageView secondImageView = (ImageView) tabSecondItem.findViewById(R.id.tab_item_image);
         secondImageView.setImageResource(R.drawable.caller_icon);
-        gamesChatTabLayout.getTabAt(1).setCustomView(tabSecondItem);
+        chatTabLayout.getTabAt(1).setCustomView(tabSecondItem);
     }
 
     private void setUpViewPager(ViewPager viewPager) {
@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpTabLayout() {
         // Add Tab
-        gamesChatTabLayout.addTab(gamesChatTabLayout.newTab().setText(R.string.first_tab_name));
-        gamesChatTabLayout.addTab(gamesChatTabLayout.newTab().setText(R.string.second_tab_name));
+        chatTabLayout.addTab(chatTabLayout.newTab().setText(R.string.first_tab_name));
+        chatTabLayout.addTab(chatTabLayout.newTab().setText(R.string.second_tab_name));
     }
 
     private void setUpToolbar(MainActivity mainActivity) {

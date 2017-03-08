@@ -11,17 +11,12 @@ import butterknife.ButterKnife;
 
 public class ChatFragment extends Fragment implements FragmentChangeListener {
     private static final String LOG_TAG = ChatFragment.class.getSimpleName();
-    private static final int TOTAL_NUMBER_LOCKED = 20;
-    private static final int UNLOCK_INCENTIVE = 2;
-    private View view;
-    private int numberOfFriends;
-    private int numberLocked;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_games_layout, container, false);
+        View view = inflater.inflate(R.layout.fragment_games_layout, container, false);
         ButterKnife.bind(this, view);
 
         return view;
