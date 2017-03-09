@@ -5,7 +5,6 @@
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chat_list"
         android:layout_width="match_parent"

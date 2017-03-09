@@ -2,23 +2,28 @@ package com.example.vartikasharma.androidchatconversation;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MessageNum extends Fragment implements FragmentChangeListener {
     private static final String LOG_TAG = MessageNum.class.getSimpleName();
+
+    @BindView(R.id.message_num_list)
+    public RecyclerView messageNumList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.i(LOG_TAG, "onCreateView");
 
 //        ViewUtils.setWindowImmersive(gamesChatActivity.getWindow());
-        View view = inflater.inflate(R.layout.activity_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_message_num, container, false);
         ButterKnife.bind(this, view);
         return view;
     }

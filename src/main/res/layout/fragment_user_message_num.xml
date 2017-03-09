@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_chat"
+    android:background="@color/colorWhite"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/message_num_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000">
-
-    </FrameLayout>
+        android:layout_margin="5dp"
+        android:clipToPadding="true" />
 
 </RelativeLayout>

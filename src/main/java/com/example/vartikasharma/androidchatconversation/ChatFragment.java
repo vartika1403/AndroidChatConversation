@@ -43,7 +43,7 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_games_layout, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat_layout, container, false);
         ButterKnife.bind(this, view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         chatList.setLayoutManager(layoutManager);
@@ -97,17 +97,6 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
                                 initializeAdapter();
                             }
                         });
-
-
-                           /* listItem = Arrays.asList(gson.fromJson(jsonArray.toString(), ChatObject[].class));
-                            if (listItem.get(i).getCar_Name() == null ||
-                                    listItem.get(i).getBrand_Name() == null ||
-                                    listItem.get(i).getPart_Name().isEmpty() ||
-                                    listItem.get(i).getQuantity_In_Stock() == 0 ||
-                                    listItem.get(i).getPart_MRP() == 0.0) {
-                                openListItem.add(listItem.get(i));*//**//**//**//**//**//**//**//*
-                            }*//**//**//**//**/
-                        // write value to the firbase in data uri
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
