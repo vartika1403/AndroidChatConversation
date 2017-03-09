@@ -2,6 +2,7 @@ package com.example.vartikasharma.androidchatconversation;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
-import com.example.vartikasharma.androidchatconversation.dataModel.ChatObject;
 import com.example.vartikasharma.androidchatconversation.dataModel.UserChatDetail;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -24,10 +24,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +36,7 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
     @BindView(R.id.message_num_list)
     public RecyclerView messageNumList;
     private List<UserChatDetail> userDetail = new ArrayList<>();
+    private UserMessageDetailAdapter userMessageDetailAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +46,8 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
 //        ViewUtils.setWindowImmersive(gamesChatActivity.getWindow());
         View view = inflater.inflate(R.layout.fragment_user_message_num, container, false);
         ButterKnife.bind(this, view);
-
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        messageNumList.setLayoutManager(layoutManager);
         //fetch data from end point
         fetchDataFromApiEndPointForMessageNum();
 
@@ -69,7 +69,6 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
             public void onResponse(Response response) throws IOException {
                 String jsonData = response.body().string();
                 Log.i(LOG_TAG, "json data" + jsonData);
-                Gson gson = new Gson();
                 if (response.isSuccessful()) {
                     JSONObject json = null;
                     JSONArray jsonArray;
@@ -110,12 +109,13 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
                             Log.i(LOG_TAG, "the key value or count, " + countMessage.get(key));
                             userChatDetail.setName(key);
                             userChatDetail.setUserNumMessage(countMessage.get(key));
+                            userDetail.add(userChatDetail);
                         }
 
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                // initializeAdapter();
+                                 initializeAdapter();
                             }
                         });
                     } catch (JSONException e) {
@@ -128,15 +128,14 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
         });
     }
 
-   /* private void initializeAdapter() {
-        if (listItem != null) {
-            Log.i(LOG_TAG, "list item," + listItem.size());
+    private void initializeAdapter() {
+        if (userDetail != null) {
+            Log.i(LOG_TAG, "user item," + userDetail.size());
 
-            chatListAdapter = new ChatListAdapter(getActivity(), listItem);
-            chatList.setAdapter(chatListAdapter);
+            userMessageDetailAdapter = new UserMessageDetailAdapter(getActivity(), userDetail);
+            messageNumList.setAdapter(userMessageDetailAdapter);
         }
-
-    }*/
+    }
 
     @Override
     public void onShowFragment() {

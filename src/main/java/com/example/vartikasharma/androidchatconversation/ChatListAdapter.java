@@ -22,7 +22,7 @@ import java.util.Locale;
 
 import static com.example.vartikasharma.androidchatconversation.R.id.image;
 
-public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder>{
+public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
     private LayoutInflater inflater;
     private List<ChatObject> objects;
     private Context context;
@@ -32,6 +32,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.chat_item, parent, false);
@@ -41,14 +42,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ChatListAdapter.ViewHolder holder, int position) {
         final ChatObject chatObject = objects.get(position);
-        Log.i("chatobject, " , chatObject.getBody());
-       Log.i("chat message time, ", chatObject.getMessage_time());
+        Log.i("chatobject, ", chatObject.getBody());
+        Log.i("chat message time, ", chatObject.getMessage_time());
         Log.i("chat image, ", chatObject.getImage_url());
-       // refresh data
+        // refresh data
         refreshDataForRecyclerView(holder);
         // set data
         String profilePicUrl = chatObject.getImage_url();
-        Log.i("profile pic url, " , profilePicUrl);
+        Log.i("profile pic url, ", profilePicUrl);
         Glide.with(context).load(profilePicUrl);
         Glide.with(context).load(profilePicUrl).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.userProfileImage) {
             @Override

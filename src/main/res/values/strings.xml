@@ -3,4 +3,6 @@
     <string name="first_tab_name">Chat</string>
     <string name="second_tab_name">Status</string>
     <string name="toast_err_msg_fetch_data">Error in displaying conversation</string>
+    <string name="sent_message">Sent Messages:</string>
+    <string name="fav_message">Favourite Message:</string>
 </resources>
