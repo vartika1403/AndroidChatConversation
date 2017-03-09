@@ -16,6 +16,7 @@ public class ChatObject {
         this.message_time = message_time;
     }
 
+
     public String getBody() {
         return body;
     }
@@ -55,6 +56,8 @@ public class ChatObject {
     public void setMessage_time(String message_time) {
         this.message_time = message_time;
     }
+
+
 
 
 }

@@ -2,4 +2,5 @@
     <string name="app_name">AndroidChatConversation</string>
     <string name="first_tab_name">Chat</string>
     <string name="second_tab_name">Status</string>
+    <string name="toast_err_msg_fetch_data">Error in displaying conversation</string>
 </resources>
