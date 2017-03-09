@@ -132,14 +132,22 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
     private void initializeAdapter() {
         if (userDetail != null) {
             Log.i(LOG_TAG, "user item," + userDetail.size());
-
-            userMessageDetailAdapter = new UserMessageDetailAdapter(getActivity(), userDetail);
+            HashMap<String, Integer> favItem = new HashMap<>();
+            favItem = ((MainActivity)getActivity()).getFavMessage();
+            Log.i(LOG_TAG, "favItem, " + favItem);
+            userMessageDetailAdapter = new UserMessageDetailAdapter(getActivity(), userDetail,favItem);
+            userMessageDetailAdapter.notifyDataSetChanged();
             messageNumList.setAdapter(userMessageDetailAdapter);
         }
     }
 
     @Override
     public void onShowFragment() {
+        HashMap<String, Integer> favMesaage = ((MainActivity)getActivity()).getFavMessage();
+        Log.i(LOG_TAG, "onShowFragment, "  + favMesaage);
+        userMessageDetailAdapter = new UserMessageDetailAdapter(getActivity(), userDetail,favMesaage);
+        messageNumList.setAdapter(userMessageDetailAdapter);
+        userMessageDetailAdapter.notifyDataSetChanged();
         Log.d(LOG_TAG, "onShowFragment: Chat Fragment shown");
     }
 

@@ -21,10 +21,12 @@ public class UserMessageDetailAdapter extends RecyclerView.Adapter<UserMessageDe
     private HashMap<String, Integer> favMessage;
     private Context context;
 
-    public UserMessageDetailAdapter(Context context, List<UserChatDetail> objects) {
+    public UserMessageDetailAdapter(Context context, List<UserChatDetail> objects, HashMap<String, Integer> favMessage) {
         this.objects = objects;
         this.context = context;
-        Log.i(LOG_TAG, "fav message userdetail, " + favMessage);
+        this.favMessage = favMessage;
+        Log.i(LOG_TAG, "favMessage name, " + favMessage);
+
         inflater = LayoutInflater.from(context);
     }
 
@@ -44,8 +46,12 @@ public class UserMessageDetailAdapter extends RecyclerView.Adapter<UserMessageDe
         // set data
         holder.userName.setText(userChatDetail.getName());
         holder.sentMessageNum.setText("sent message no" + " " + userChatDetail.getUserNumMessage());
-        holder.favMessageNum.setText("favorite message no " + " " + favMessage.get(userChatDetail.getName()));
+        Log.i(LOG_TAG, "favMessage name onbind, " + favMessage);
+        if (favMessage!= null) {
+            holder.favMessageNum.setText("fav message" + " " + favMessage.get(userChatDetail.getName()));
+        }
     }
+
 
     private void refreshDataForRecyclerView(ViewHolder holder) {
         holder.userName.invalidate();

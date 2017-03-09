@@ -24,7 +24,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -137,11 +136,6 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
 
     @Override
     public void onScrollFragment(int position, int offset) {
-
-    }
-
-    @Override
-    public void setFavMessage(HashMap<String, Integer> favMessage) {
 
     }
 }

@@ -90,6 +90,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                     favMessageNum = getFavoriteMessage(name);
                     Log.i(LOG_TAG, "favmessage is selected," + favMessageNum);
                 }
+
+                ((MainActivity)context).setFavMessage(favMessageNum);
+
             }
         });
     }

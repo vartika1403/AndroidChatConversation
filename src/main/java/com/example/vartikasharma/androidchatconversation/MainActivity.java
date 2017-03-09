@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.pager)
     /* package-local */ ViewPager viewPager;
 
+    private HashMap<String, Integer> favMessageList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,5 +116,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpToolbar(MainActivity mainActivity) {
         setSupportActionBar(toolbar);
+    }
+
+    public void setFavMessage(HashMap<String, Integer> favMessage) {
+        favMessageList = favMessage;
+
+        Log.i(LOG_TAG, "fav message list," + favMessageList);
+    }
+
+    public HashMap<String, Integer> getFavMessage() {
+        Log.i(LOG_TAG, "fav message list get me," + favMessageList);
+        return favMessageList;
     }
 }
