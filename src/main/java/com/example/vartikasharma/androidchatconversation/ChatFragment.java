@@ -47,9 +47,8 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
         ButterKnife.bind(this, view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         chatList.setLayoutManager(layoutManager);
+        //fetch data from api end point
         fetchDataFromApiEndPoint();
-
-
 
         return view;
     }
