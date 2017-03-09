@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -113,6 +114,7 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
 
             chatListAdapter = new ChatListAdapter(getActivity(), listItem);
             chatList.setAdapter(chatListAdapter);
+
         }
 
     }
@@ -124,7 +126,8 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
 
     @Override
     public void onShowFragment() {
-        Log.d(LOG_TAG, "onShowFragment: Games Fragment shown");
+        Log.d(LOG_TAG, "onShowFragment: Chat Fragment shown");
+
     }
 
     @Override
@@ -134,6 +137,11 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
 
     @Override
     public void onScrollFragment(int position, int offset) {
+
+    }
+
+    @Override
+    public void setFavMessage(HashMap<String, Integer> favMessage) {
 
     }
 }

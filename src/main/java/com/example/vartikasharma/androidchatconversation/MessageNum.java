@@ -69,6 +69,7 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
             public void onResponse(Response response) throws IOException {
                 String jsonData = response.body().string();
                 Log.i(LOG_TAG, "json data" + jsonData);
+                Gson gson = new Gson();
                 if (response.isSuccessful()) {
                     JSONObject json = null;
                     JSONArray jsonArray;

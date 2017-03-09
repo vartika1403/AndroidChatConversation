@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -113,5 +115,4 @@ public class MainActivity extends AppCompatActivity {
     private void setUpToolbar(MainActivity mainActivity) {
         setSupportActionBar(toolbar);
     }
-
 }

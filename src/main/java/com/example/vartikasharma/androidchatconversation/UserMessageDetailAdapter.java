@@ -11,17 +11,20 @@ import android.widget.TextView;
 
 import com.example.vartikasharma.androidchatconversation.dataModel.UserChatDetail;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class UserMessageDetailAdapter extends RecyclerView.Adapter<UserMessageDetailAdapter.ViewHolder> {
     private static final String LOG_TAG = UserMessageDetailAdapter.class.getSimpleName();
     private LayoutInflater inflater;
     private List<UserChatDetail> objects;
+    private HashMap<String, Integer> favMessage;
     private Context context;
 
     public UserMessageDetailAdapter(Context context, List<UserChatDetail> objects) {
         this.objects = objects;
         this.context = context;
+        Log.i(LOG_TAG, "fav message userdetail, " + favMessage);
         inflater = LayoutInflater.from(context);
     }
 
@@ -41,7 +44,7 @@ public class UserMessageDetailAdapter extends RecyclerView.Adapter<UserMessageDe
         // set data
         holder.userName.setText(userChatDetail.getName());
         holder.sentMessageNum.setText("sent message no" + " " + userChatDetail.getUserNumMessage());
-       // holder.favMessageNum.setText(R.string.fav_message);
+        holder.favMessageNum.setText("favorite message no " + " " + favMessage.get(userChatDetail.getName()));
     }
 
     private void refreshDataForRecyclerView(ViewHolder holder) {

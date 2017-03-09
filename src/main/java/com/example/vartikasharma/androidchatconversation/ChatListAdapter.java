@@ -2,6 +2,7 @@ package com.example.vartikasharma.androidchatconversation;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -17,15 +18,20 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.vartikasharma.androidchatconversation.dataModel.ChatObject;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-
-import static com.example.vartikasharma.androidchatconversation.R.id.image;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
+    private static final String LOG_TAG = ChatListAdapter.class.getSimpleName();
     private LayoutInflater inflater;
     private List<ChatObject> objects;
     private Context context;
+    private ChatListAdapter chatListAdapter;
+    public HashMap<String, Integer> favMessageNum = new HashMap<>();
+
+    public ChatListAdapter(Context context) {
+        this.context = context;
+    }
 
     public ChatListAdapter(Context context, List<ChatObject> objects) {
         this.objects = objects;
@@ -57,6 +63,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                 RoundedBitmapDrawable circularBitmapDrawable =
                         RoundedBitmapDrawableFactory.create(context.getResources(), resource);
                 circularBitmapDrawable.setCircular(true);
+                holder.userProfileImage.setVisibility(View.VISIBLE);
                 holder.userProfileImage.setImageDrawable(circularBitmapDrawable);
             }
         });
@@ -64,6 +71,37 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         holder.userNameText.setText(chatObject.getUsername());
         holder.bodyText.setText(chatObject.getBody());
         holder.messageTimeText.setText(chatObject.getMessage_time());
+        holder.favButton.setVisibility(View.VISIBLE);
+        holder.favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = holder.nameText.getText().toString();
+                if(holder.favButton.isSelected()) {
+                    Log.i(LOG_TAG, "is selected, " + holder.favButton.isSelected());
+                    holder.favButton.invalidate();
+                    holder.favButton.setImageResource(R.drawable.fav_icon);
+                    holder.favButton.setVisibility(View.VISIBLE);
+                    favMessageNum.put(name, favMessageNum.get(name)-1);
+                    Log.i(LOG_TAG, "favmesage, " + favMessageNum.get(name));
+                    holder.favButton.setSelected(false);
+                } else {
+                    holder.favButton.setSelected(true);
+                    holder.favButton.setImageResource(R.drawable.fav_message_icon);
+                    favMessageNum = getFavoriteMessage(name);
+                    Log.i(LOG_TAG, "favmessage is selected," + favMessageNum);
+                }
+            }
+        });
+    }
+
+    public HashMap<String, Integer> getFavoriteMessage(String name) {
+        Log.i(LOG_TAG, "the name, " + name);
+        if (favMessageNum.containsKey(name)) {
+            favMessageNum.put(name, favMessageNum.get(name)+ 1);
+        } else {
+            favMessageNum.put(name, 1);
+        }
+        return favMessageNum;
     }
 
     private void refreshDataForRecyclerView(ViewHolder holder) {
@@ -77,6 +115,8 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         holder.bodyText.setText("");
         holder.messageTimeText.invalidate();
         holder.messageTimeText.setText("");
+        holder.favButton.invalidate();
+        holder.favButton.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -90,6 +130,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         TextView userNameText;
         TextView bodyText;
         TextView messageTimeText;
+        ImageView favButton;
 
         public ViewHolder(View view) {
             super(view);
@@ -99,6 +140,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             userNameText = (TextView) view.findViewById(R.id.user_name_text);
             bodyText = (TextView) view.findViewById(R.id.body_text);
             messageTimeText = (TextView) view.findViewById(R.id.message_time);
+            favButton = (ImageView) view.findViewById(R.id.fav_button);
         }
     }
 }
