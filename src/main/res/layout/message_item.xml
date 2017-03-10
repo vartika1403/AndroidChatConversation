@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:gravity="center"
-    android:background="@drawable/text_feedback_content_border"
-    android:layout_height="100dp">
+    android:gravity="center_vertical"
+    android:layout_height="80dp">
 
     <TextView
         android:id="@+id/user_name"
-        android:padding="5dp"
-        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:textSize="22sp"
         android:text="Vartika"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -17,10 +19,9 @@
         android:id="@+id/sent_message_num_text"
         android:layout_toRightOf="@id/user_name"
         android:layout_toEndOf="@id/user_name"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:padding="5dp"
-        android:text="Message Sent:"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:textSize="15sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -30,9 +31,15 @@
         android:layout_toEndOf="@id/sent_message_num_text"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:padding="5dp"
-        android:text="fav message num:"
+        android:textSize="15sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/fav_message_num_text"
+        android:background="@color/card_expand_title_color"/>
 
 </RelativeLayout>

@@ -45,10 +45,12 @@ public class UserMessageDetailAdapter extends RecyclerView.Adapter<UserMessageDe
         refreshDataForRecyclerView(holder);
         // set data
         holder.userName.setText(userChatDetail.getName());
-        holder.sentMessageNum.setText("sent message no" + " " + userChatDetail.getUserNumMessage());
+        holder.sentMessageNum.setText("sent:" + " " + userChatDetail.getUserNumMessage());
         Log.i(LOG_TAG, "favMessage name onbind, " + favMessage);
         if (favMessage!= null) {
-            holder.favMessageNum.setText("fav message" + " " + favMessage.get(userChatDetail.getName()));
+            holder.favMessageNum.setText("fav:" + " " + favMessage.get(userChatDetail.getName()));
+        } else {
+            holder.favMessageNum.setText("fav:" + " " + "0");
         }
     }
 
