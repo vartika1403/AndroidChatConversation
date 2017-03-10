@@ -11,13 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/colorChatBackground"
+        android:background="@color/colorPink"
         android:contentInsetLeft="0dp"
         android:contentInsetStart="0dp"
-        android:foreground="?android:windowContentOverlay"
-        android:padding="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp">
+        android:foreground="?android:windowContentOverlay">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,8 +26,8 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/app_icon_width"
+                android:layout_height="@dimen/app_icon_height"
                 android:src="@drawable/chat_message" />
 
             <TextView
@@ -42,7 +39,7 @@
                 android:layout_marginStart="8dp"
                 android:text="@string/chat_text"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp"
+                android:textSize="@dimen/chat_text_size"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -71,12 +68,11 @@
         android:layout_marginLeft="-10dp"
         android:layout_marginRight="-10dp"
         android:layout_marginTop="2dp"
-        android:background="#eaedf2"
+        android:background="@color/colorTabLayout"
         android:clipToPadding="false"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/colorChatBackground"
+        app:tabIndicatorColor="@color/colorPink"
         app:tabIndicatorHeight="3dp"
-        app:tabMaxWidth="0dp"
         app:tabMinWidth="50dp"
         app:tabMode="fixed"
         app:tabPaddingEnd="-1dp"
@@ -89,7 +85,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@id/tabLayout"
-        android:background="@color/colorChatBackground"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </RelativeLayout>

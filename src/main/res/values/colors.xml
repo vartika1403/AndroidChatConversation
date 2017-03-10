@@ -11,4 +11,7 @@
     <color name="card_expand_title_color">#B3B2B2</color>
     <color name="colorPurple">#800080</color>
     <color name="colorChatBackground">#451D7E </color>
+    <color name="colorTabLayout">#eaedf2</color>
+    <color name="colorPink">#e55ea2</color>
+    <color name="colorLightPink">#FFE3F1</color>
 </resources>

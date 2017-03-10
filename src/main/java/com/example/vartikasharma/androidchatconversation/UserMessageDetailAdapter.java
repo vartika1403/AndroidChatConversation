@@ -42,15 +42,19 @@ public class UserMessageDetailAdapter extends RecyclerView.Adapter<UserMessageDe
         holder.userName.setText(userChatDetail.getName());
         String numMessage = String.valueOf(userChatDetail.getUserNumMessage());
         holder.sentMessageNum.setText(numMessage);
-        if (favMessage != null) {
-            String favNumMessage = String.valueOf(favMessage.get(userChatDetail.getName()));
-
-            if (favNumMessage != null) {
-                holder.favMessageNum.setText(favNumMessage);
-            } else {
-                holder.favMessageNum.setText("0");
-            }
+        Log.i(LOG_TAG, "favMessage," + favMessage);
+        if (favMessage == null) {
+            holder.favMessageNum.setText("0");
+            return;
         }
+            String favNumMessage = String.valueOf(favMessage.get(userChatDetail.getName()));
+            if (!favNumMessage.equalsIgnoreCase("null")) {
+                Log.i(LOG_TAG, "favMessage is," + favNumMessage);
+                holder.favMessageNum.setText(favNumMessage);
+            } /*else {
+                Log.i(LOG_TAG, "favMessage is 0," + favNumMessage);
+                holder.favMessageNum.setText("0");
+            }*/
     }
 
 
@@ -60,7 +64,7 @@ public class UserMessageDetailAdapter extends RecyclerView.Adapter<UserMessageDe
         holder.sentMessageNum.invalidate();
         holder.sentMessageNum.setText("");
         holder.favMessageNum.invalidate();
-        holder.favMessageNum.setText("");
+        holder.favMessageNum.setText("0");
     }
 
     @Override
