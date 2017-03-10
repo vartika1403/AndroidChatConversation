@@ -37,8 +37,6 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
     @BindView(R.id.chat_list)
     public RecyclerView chatList;
 
-    private ChatListAdapter chatListAdapter;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -109,9 +107,7 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
 
     private void initializeAdapter() {
         if (listItem != null) {
-            Log.i(LOG_TAG, "list item," + listItem.size());
-
-            chatListAdapter = new ChatListAdapter(getActivity(), listItem);
+            ChatListAdapter chatListAdapter = new ChatListAdapter(getActivity(), listItem);
             chatList.setAdapter(chatListAdapter);
         }
     }

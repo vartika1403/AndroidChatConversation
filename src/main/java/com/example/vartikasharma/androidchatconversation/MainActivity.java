@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        setUpToolbar(this);
+        setUpToolbar();
 
         setUpTabLayout();
 
@@ -111,18 +111,15 @@ public class MainActivity extends AppCompatActivity {
         chatTabLayout.addTab(chatTabLayout.newTab().setText(R.string.second_tab_name));
     }
 
-    private void setUpToolbar(MainActivity mainActivity) {
+    private void setUpToolbar() {
         setSupportActionBar(toolbar);
+    }
+
+    public HashMap<String, Integer> getFavMessage() {
+        return favMessageList;
     }
 
     public void setFavMessage(HashMap<String, Integer> favMessage) {
         favMessageList = favMessage;
-
-        Log.i(LOG_TAG, "fav message list," + favMessageList);
-    }
-
-    public HashMap<String, Integer> getFavMessage() {
-        Log.i(LOG_TAG, "fav message list get me," + favMessageList);
-        return favMessageList;
     }
 }

@@ -26,8 +26,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     private LayoutInflater inflater;
     private List<ChatObject> objects;
     private Context context;
-    private ChatListAdapter chatListAdapter;
-    public HashMap<String, Integer> favMessageNum = new HashMap<>();
+    private HashMap<String, Integer> favMessageNum = new HashMap<>();
     private HashMap<Integer, Boolean> favMessageSelected = new HashMap<>();
 
     public ChatListAdapter(Context context, List<ChatObject> objects) {
@@ -45,14 +44,10 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ChatListAdapter.ViewHolder holder, final int position) {
         final ChatObject chatObject = objects.get(position);
-        Log.i("chatobject, ", chatObject.getBody());
-        Log.i("chat message time, ", chatObject.getMessage_time());
-        Log.i("chat image, ", chatObject.getImage_url());
         // refresh data
         refreshDataForRecyclerView(holder);
         // set data
         String profilePicUrl = chatObject.getImage_url();
-        Log.i("profile pic url, ", profilePicUrl);
         if (!profilePicUrl.isEmpty()) {
             Glide.with(context).load(profilePicUrl).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.userProfileImage) {
                 @Override
@@ -81,8 +76,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         holder.bodyText.setText(chatObject.getBody());
         String dateTime = chatObject.getMessage_time();
         String[] parts = dateTime.split("T");
-        Log.i(LOG_TAG, "partDate, " + parts[0]);
-        Log.i(LOG_TAG, "partTime, " + parts[1]);
         holder.messageDateText.setText(parts[0]);
         holder.messageTimeText.setText(parts[1]);
         holder.favButton.setVisibility(View.VISIBLE);
@@ -90,7 +83,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         if (favMessageSelected.isEmpty() || (favMessageSelected.get(position) == null) || (!favMessageSelected.get(position))) {
             holder.favButton.setImageResource(R.drawable.fav_icon);
             favMessageSelected.put(position, false);
-        } else if (favMessageSelected.get(position)){
+        } else if (favMessageSelected.get(position)) {
             holder.favButton.setImageResource(R.drawable.fav_red);
         }
 
@@ -98,29 +91,25 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 String name = holder.nameText.getText().toString();
-                if(favMessageSelected.get(position)) {
-                    Log.i(LOG_TAG, "is selected, " + favMessageSelected.get(position));
+                if (favMessageSelected.get(position)) {
                     holder.favButton.invalidate();
                     holder.favButton.setImageResource(R.drawable.fav_icon);
-                    favMessageNum.put(name, favMessageNum.get(name)-1);
+                    favMessageNum.put(name, favMessageNum.get(name) - 1);
                     favMessageSelected.put(position, false);
-                    Log.i(LOG_TAG, "favmesage, " + favMessageNum.get(name));
                 } else {
                     holder.favButton.invalidate();
                     holder.favButton.setImageResource(R.drawable.fav_red);
                     favMessageSelected.put(position, true);
                     favMessageNum = getFavoriteMessage(name);
-                    Log.i(LOG_TAG, "favmessage is selected," + favMessageNum);
                 }
             }
         });
-        ((MainActivity)context).setFavMessage(favMessageNum);
+        ((MainActivity) context).setFavMessage(favMessageNum);
     }
 
-    public HashMap<String, Integer> getFavoriteMessage(String name) {
-        Log.i(LOG_TAG, "the name, " + name);
+    private HashMap<String, Integer> getFavoriteMessage(String name) {
         if (favMessageNum.containsKey(name)) {
-            favMessageNum.put(name, favMessageNum.get(name)+ 1);
+            favMessageNum.put(name, favMessageNum.get(name) + 1);
         } else {
             favMessageNum.put(name, 1);
         }

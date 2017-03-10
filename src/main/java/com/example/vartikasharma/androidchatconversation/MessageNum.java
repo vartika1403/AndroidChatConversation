@@ -43,7 +43,6 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
                              Bundle savedInstanceState) {
         Log.i(LOG_TAG, "onCreateView");
 
-//        ViewUtils.setWindowImmersive(gamesChatActivity.getWindow());
         View view = inflater.inflate(R.layout.fragment_user_message_num, container, false);
         ButterKnife.bind(this, view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -68,8 +67,6 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
             @Override
             public void onResponse(Response response) throws IOException {
                 String jsonData = response.body().string();
-                Log.i(LOG_TAG, "json data" + jsonData);
-                Gson gson = new Gson();
                 if (response.isSuccessful()) {
                     JSONObject json = null;
                     JSONArray jsonArray;
@@ -81,13 +78,10 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
                     try {
                         assert json != null;
                         jsonArray = json.getJSONArray("messages");
-                        Log.i(LOG_TAG, "jsonArray," + jsonArray.getJSONObject(0).getString("message-time"));
-                        Log.i(LOG_TAG, "json array length, " + jsonArray.length());
 
                         ArrayList<String> name = new ArrayList<String>();
 
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            Log.i(LOG_TAG, "userChatDetails, " + jsonArray.getJSONObject(i).getString("Name"));
                             name.add(jsonArray.getJSONObject(i).getString("Name"));
                         }
                         // count no of messages for each user
@@ -96,9 +90,7 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
                         for (int i = 0; i < name.size(); i++) {
                             if (countMessage.containsKey(name.get(i))) {
                                 String value = name.get(i);
-                                Log.i(LOG_TAG, "the value, " + value);
                                 countMessage.put(name.get(i), countMessage.get(value) + 1);
-                                Log.i(LOG_TAG, "the value count," + countMessage.get(name.get(i)));
                             } else {
                                 countMessage.put(name.get(i), 1);
                             }
@@ -106,8 +98,6 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
                         //get the value for each user and no of message of each user
                         for (String key : countMessage.keySet()) {
                             UserChatDetail userChatDetail = new UserChatDetail();
-                            Log.i(LOG_TAG, "the key, " + key);
-                            Log.i(LOG_TAG, "the key value or count, " + countMessage.get(key));
                             userChatDetail.setName(key);
                             userChatDetail.setUserNumMessage(countMessage.get(key));
                             userDetail.add(userChatDetail);
@@ -116,7 +106,7 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                 initializeAdapter();
+                                initializeAdapter();
                             }
                         });
                     } catch (JSONException e) {
@@ -131,11 +121,8 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
 
     private void initializeAdapter() {
         if (userDetail != null) {
-            Log.i(LOG_TAG, "user item," + userDetail.size());
-            HashMap<String, Integer> favItem = new HashMap<>();
-            favItem = ((MainActivity)getActivity()).getFavMessage();
-            Log.i(LOG_TAG, "favItem, " + favItem);
-            userMessageDetailAdapter = new UserMessageDetailAdapter(getActivity(), userDetail,favItem);
+            HashMap<String, Integer> favItem = ((MainActivity) getActivity()).getFavMessage();
+            userMessageDetailAdapter = new UserMessageDetailAdapter(getActivity(), userDetail, favItem);
             userMessageDetailAdapter.notifyDataSetChanged();
             messageNumList.setAdapter(userMessageDetailAdapter);
         }
@@ -143,12 +130,11 @@ public class MessageNum extends Fragment implements FragmentChangeListener {
 
     @Override
     public void onShowFragment() {
-        HashMap<String, Integer> favMesaage = ((MainActivity)getActivity()).getFavMessage();
-        Log.i(LOG_TAG, "onShowFragment, "  + favMesaage);
-        userMessageDetailAdapter = new UserMessageDetailAdapter(getActivity(), userDetail,favMesaage);
+        Log.d(LOG_TAG, "onShowFragment: Chat Fragment shown");
+        HashMap<String, Integer> favMesaage = ((MainActivity) getActivity()).getFavMessage();
+        userMessageDetailAdapter = new UserMessageDetailAdapter(getActivity(), userDetail, favMesaage);
         messageNumList.setAdapter(userMessageDetailAdapter);
         userMessageDetailAdapter.notifyDataSetChanged();
-        Log.d(LOG_TAG, "onShowFragment: Chat Fragment shown");
     }
 
     @Override
