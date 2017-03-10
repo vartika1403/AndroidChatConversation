@@ -1,13 +1,10 @@
 package com.example.vartikasharma.androidchatconversation;
 
-
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +17,6 @@ import com.example.vartikasharma.androidchatconversation.dataModel.ChatObject;
 
 import java.util.HashMap;
 import java.util.List;
-
-import static android.R.attr.resource;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
     private static final String LOG_TAG = ChatListAdapter.class.getSimpleName();
@@ -77,7 +72,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         if (favMessageSelected.isEmpty() || (favMessageSelected.get(position) == null) || (!favMessageSelected.get(position))) {
             holder.favButton.setImageResource(R.drawable.fav_icon);
             favMessageSelected.put(position, false);
-        } else  {
+        } else {
             holder.favButton.setImageResource(R.drawable.fav_red);
         }
 

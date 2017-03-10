@@ -12,8 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="@color/colorPink"
-        android:contentInsetLeft="0dp"
-        android:contentInsetStart="0dp"
         android:foreground="?android:windowContentOverlay">
 
         <LinearLayout
