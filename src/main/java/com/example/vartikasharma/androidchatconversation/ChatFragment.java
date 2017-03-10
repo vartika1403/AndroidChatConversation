@@ -113,9 +113,7 @@ public class ChatFragment extends Fragment implements FragmentChangeListener {
 
             chatListAdapter = new ChatListAdapter(getActivity(), listItem);
             chatList.setAdapter(chatListAdapter);
-
         }
-
     }
 
     @Override

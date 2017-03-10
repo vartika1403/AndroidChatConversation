@@ -39,8 +39,6 @@ public class UserMessageDetailAdapter extends RecyclerView.Adapter<UserMessageDe
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final UserChatDetail userChatDetail = objects.get(position);
-        Log.i(LOG_TAG, "user name, " + userChatDetail.getName());
-        Log.i(LOG_TAG, "user message num, " + userChatDetail.getUserNumMessage());
         // refresh data
         refreshDataForRecyclerView(holder);
         // set data

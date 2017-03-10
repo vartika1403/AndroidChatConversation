@@ -56,17 +56,29 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         // set data
         String profilePicUrl = chatObject.getImage_url();
         Log.i("profile pic url, ", profilePicUrl);
-        Glide.with(context).load(profilePicUrl);
-        Glide.with(context).load(profilePicUrl).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.userProfileImage) {
-            @Override
-            protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                circularBitmapDrawable.setCircular(true);
-                holder.userProfileImage.setVisibility(View.VISIBLE);
-                holder.userProfileImage.setImageDrawable(circularBitmapDrawable);
-            }
-        });
+        if (!profilePicUrl.isEmpty()) {
+            Glide.with(context).load(profilePicUrl).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.userProfileImage) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.userProfileImage.setVisibility(View.VISIBLE);
+                    holder.userProfileImage.setImageDrawable(circularBitmapDrawable);
+                }
+            });
+        } else {
+            Glide.with(context).load(R.drawable.default_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.userProfileImage) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.userProfileImage.setVisibility(View.VISIBLE);
+                    holder.userProfileImage.setImageDrawable(circularBitmapDrawable);
+                }
+            });
+        }
         holder.nameText.setText(chatObject.getName());
         holder.userNameText.setText(chatObject.getUsername());
         holder.bodyText.setText(chatObject.getBody());
