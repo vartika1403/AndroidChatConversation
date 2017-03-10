@@ -28,10 +28,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     private Context context;
     private ChatListAdapter chatListAdapter;
     public HashMap<String, Integer> favMessageNum = new HashMap<>();
-
-    public ChatListAdapter(Context context) {
-        this.context = context;
-    }
+    private HashMap<Integer, Boolean> favMessageSelected = new HashMap<>();
 
     public ChatListAdapter(Context context, List<ChatObject> objects) {
         this.objects = objects;
@@ -46,7 +43,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(final ChatListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final ChatListAdapter.ViewHolder holder, final int position) {
         final ChatObject chatObject = objects.get(position);
         Log.i("chatobject, ", chatObject.getBody());
         Log.i("chat message time, ", chatObject.getMessage_time());
@@ -89,29 +86,35 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         holder.messageDateText.setText(parts[0]);
         holder.messageTimeText.setText(parts[1]);
         holder.favButton.setVisibility(View.VISIBLE);
+
+        if (favMessageSelected.isEmpty() || (favMessageSelected.get(position) == null) || (!favMessageSelected.get(position))) {
+            holder.favButton.setImageResource(R.drawable.fav_icon);
+            favMessageSelected.put(position, false);
+        } else if (favMessageSelected.get(position)){
+            holder.favButton.setImageResource(R.drawable.fav_red);
+        }
+
         holder.favButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = holder.nameText.getText().toString();
-                if(holder.favButton.isSelected()) {
-                    Log.i(LOG_TAG, "is selected, " + holder.favButton.isSelected());
+                if(favMessageSelected.get(position)) {
+                    Log.i(LOG_TAG, "is selected, " + favMessageSelected.get(position));
                     holder.favButton.invalidate();
                     holder.favButton.setImageResource(R.drawable.fav_icon);
-                    holder.favButton.setVisibility(View.VISIBLE);
                     favMessageNum.put(name, favMessageNum.get(name)-1);
+                    favMessageSelected.put(position, false);
                     Log.i(LOG_TAG, "favmesage, " + favMessageNum.get(name));
-                    holder.favButton.setSelected(false);
                 } else {
-                    holder.favButton.setSelected(true);
+                    holder.favButton.invalidate();
                     holder.favButton.setImageResource(R.drawable.fav_red);
+                    favMessageSelected.put(position, true);
                     favMessageNum = getFavoriteMessage(name);
                     Log.i(LOG_TAG, "favmessage is selected," + favMessageNum);
                 }
-
-                ((MainActivity)context).setFavMessage(favMessageNum);
-
             }
         });
+        ((MainActivity)context).setFavMessage(favMessageNum);
     }
 
     public HashMap<String, Integer> getFavoriteMessage(String name) {
@@ -138,6 +141,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         holder.messageDateText.invalidate();
         holder.messageDateText.setText("");
         holder.favButton.invalidate();
+        holder.favButton.setImageResource(0);
         holder.favButton.setVisibility(View.INVISIBLE);
     }
 
