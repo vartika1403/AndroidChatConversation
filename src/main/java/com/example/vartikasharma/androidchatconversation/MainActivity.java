@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpViewPager(ViewPager viewPager) {
         final ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFrag(new ChatFragment(), "chatDetail");
-        viewPagerAdapter.addFrag(new MessageNum(), "conversationCount");
+        viewPagerAdapter.addFrag(new MessageNumFragment(), "conversationCount");
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.requestTransparentRegion(viewPager);
         ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {

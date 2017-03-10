@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 
 import com.example.vartikasharma.androidchatconversation.dataModel.UserChatDetail;
-import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -30,8 +29,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MessageNum extends Fragment implements FragmentChangeListener {
-    private static final String LOG_TAG = MessageNum.class.getSimpleName();
+public class MessageNumFragment extends Fragment implements FragmentChangeListener {
+    private static final String LOG_TAG = MessageNumFragment.class.getSimpleName();
     private static final String URL = "http://haptik.mobi/android/test_data/";
     @BindView(R.id.message_num_list)
     public RecyclerView messageNumList;

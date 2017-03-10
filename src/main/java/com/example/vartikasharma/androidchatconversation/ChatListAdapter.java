@@ -21,6 +21,8 @@ import com.example.vartikasharma.androidchatconversation.dataModel.ChatObject;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.R.attr.resource;
+
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
     private static final String LOG_TAG = ChatListAdapter.class.getSimpleName();
     private LayoutInflater inflater;
@@ -52,22 +54,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             Glide.with(context).load(profilePicUrl).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.userProfileImage) {
                 @Override
                 protected void setResource(Bitmap resource) {
-                    RoundedBitmapDrawable circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                    circularBitmapDrawable.setCircular(true);
-                    holder.userProfileImage.setVisibility(View.VISIBLE);
-                    holder.userProfileImage.setImageDrawable(circularBitmapDrawable);
+                    setImageForUser(holder.userProfileImage, resource);
                 }
             });
         } else {
             Glide.with(context).load(R.drawable.default_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.userProfileImage) {
                 @Override
                 protected void setResource(Bitmap resource) {
-                    RoundedBitmapDrawable circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                    circularBitmapDrawable.setCircular(true);
-                    holder.userProfileImage.setVisibility(View.VISIBLE);
-                    holder.userProfileImage.setImageDrawable(circularBitmapDrawable);
+                    setImageForUser(holder.userProfileImage, resource);
                 }
             });
         }
@@ -83,7 +77,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         if (favMessageSelected.isEmpty() || (favMessageSelected.get(position) == null) || (!favMessageSelected.get(position))) {
             holder.favButton.setImageResource(R.drawable.fav_icon);
             favMessageSelected.put(position, false);
-        } else if (favMessageSelected.get(position)) {
+        } else  {
             holder.favButton.setImageResource(R.drawable.fav_red);
         }
 
@@ -92,12 +86,10 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             public void onClick(View view) {
                 String name = holder.nameText.getText().toString();
                 if (favMessageSelected.get(position)) {
-                    holder.favButton.invalidate();
                     holder.favButton.setImageResource(R.drawable.fav_icon);
                     favMessageNum.put(name, favMessageNum.get(name) - 1);
                     favMessageSelected.put(position, false);
                 } else {
-                    holder.favButton.invalidate();
                     holder.favButton.setImageResource(R.drawable.fav_red);
                     favMessageSelected.put(position, true);
                     favMessageNum = getFavoriteMessage(name);
@@ -105,6 +97,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             }
         });
         ((MainActivity) context).setFavMessage(favMessageNum);
+    }
+
+    private void setImageForUser(ImageView userImage, Bitmap resource) {
+        RoundedBitmapDrawable circularBitmapDrawable =
+                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+        circularBitmapDrawable.setCircular(true);
+        userImage.setVisibility(View.VISIBLE);
+        userImage.setImageDrawable(circularBitmapDrawable);
     }
 
     private HashMap<String, Integer> getFavoriteMessage(String name) {
