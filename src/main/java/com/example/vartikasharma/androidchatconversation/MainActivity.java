@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout tabSecondItem = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.tab_layout_item, null);
         TextView secondTextView = (TextView) tabSecondItem.findViewById(R.id.tab_item_text);
         secondTextView.setText(R.string.second_tab_name);
-        //tabSecondItem.setBackgroundResource(R.drawable.second_tab_background);
         secondTextView.setTextColor(Color.parseColor("#2290D3"));
         ImageView secondImageView = (ImageView) tabSecondItem.findViewById(R.id.tab_item_image);
         secondImageView.setImageResource(R.drawable.caller_icon);
@@ -72,10 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpViewPager(ViewPager viewPager) {
         final ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFrag(new ChatFragment(), "games");
-        MessageNum messageNum = new MessageNum();
-
-        viewPagerAdapter.addFrag(messageNum, "chat");
+        viewPagerAdapter.addFrag(new ChatFragment(), "chatDetail");
+        viewPagerAdapter.addFrag(new MessageNum(), "conversationCount");
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.requestTransparentRegion(viewPager);
         ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
