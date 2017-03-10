@@ -70,7 +70,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         holder.nameText.setText(chatObject.getName());
         holder.userNameText.setText(chatObject.getUsername());
         holder.bodyText.setText(chatObject.getBody());
-        holder.messageTimeText.setText(chatObject.getMessage_time());
+        String dateTime = chatObject.getMessage_time();
+        String[] parts = dateTime.split("T");
+        Log.i(LOG_TAG, "partDate, " + parts[0]);
+        Log.i(LOG_TAG, "partTime, " + parts[1]);
+        holder.messageDateText.setText(parts[0]);
+        holder.messageTimeText.setText(parts[1]);
         holder.favButton.setVisibility(View.VISIBLE);
         holder.favButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +123,8 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         holder.bodyText.setText("");
         holder.messageTimeText.invalidate();
         holder.messageTimeText.setText("");
+        holder.messageDateText.invalidate();
+        holder.messageDateText.setText("");
         holder.favButton.invalidate();
         holder.favButton.setVisibility(View.INVISIBLE);
     }
@@ -133,6 +140,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         TextView userNameText;
         TextView bodyText;
         TextView messageTimeText;
+        TextView messageDateText;
         ImageView favButton;
 
         public ViewHolder(View view) {
@@ -143,6 +151,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             userNameText = (TextView) view.findViewById(R.id.user_name_text);
             bodyText = (TextView) view.findViewById(R.id.body_text);
             messageTimeText = (TextView) view.findViewById(R.id.message_time);
+            messageDateText = (TextView) view.findViewById(R.id.message_date);
             favButton = (ImageView) view.findViewById(R.id.fav_button);
         }
     }

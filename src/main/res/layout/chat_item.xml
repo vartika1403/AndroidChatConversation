@@ -35,32 +35,8 @@
         android:layout_toEndOf="@id/user_profile_image"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/body_text"
-        android:layout_below="@id/user_name_text"
-        android:layout_toRightOf="@id/user_profile_image"
-        android:layout_toEndOf="@id/user_profile_image"
-        android:textSize="15sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/message_time"
-        android:layout_below="@id/user_name_text"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -74,5 +50,41 @@
         android:layout_alignParentRight="true"
         android:layout_width="40dp"
         android:layout_height="40dp" />
+
+    <TextView
+        android:id="@+id/message_date"
+        android:layout_below="@id/fav_button"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/message_time"
+        android:layout_below="@id/message_date"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/body_text"
+        android:layout_below="@id/user_name_text"
+        android:layout_toRightOf="@id/user_profile_image"
+        android:layout_toEndOf="@id/user_profile_image"
+        android:textSize="15sp"
+        android:maxWidth="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
