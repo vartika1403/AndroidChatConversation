@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         secondTextView.setText(R.string.second_tab_name);
         secondTextView.setTextColor(Color.parseColor("#2290D3"));
         ImageView secondImageView = (ImageView) tabSecondItem.findViewById(R.id.tab_item_image);
-        secondImageView.setImageResource(R.drawable.caller_icon);
+        secondImageView.setImageResource(R.drawable.status_message);
         chatTabLayout.getTabAt(1).setCustomView(tabSecondItem);
     }
 

@@ -103,7 +103,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                     holder.favButton.setSelected(false);
                 } else {
                     holder.favButton.setSelected(true);
-                    holder.favButton.setImageResource(R.drawable.fav_message_icon);
+                    holder.favButton.setImageResource(R.drawable.fav_red);
                     favMessageNum = getFavoriteMessage(name);
                     Log.i(LOG_TAG, "favmessage is selected," + favMessageNum);
                 }
